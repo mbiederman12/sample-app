@@ -13,6 +13,10 @@ var opentok = new OpenTok(apiKey, apiSecret);
 
 app.use(express.static(__dirname + '/public')); 
 
+app.use(express.urlencoded({
+  extended: true
+}))
+
 // Create Session + Store in Express App
 opentok.createSession(function (err, session) {
     if (err) return console.log(err);
@@ -58,7 +62,7 @@ app.get('/archives', (req, res)=>{
 });
 
 app.post('/auth', function(req, res){
-    let sessionId = req.body.sessionId;
+    var sessionId = req.body.sessionId;
     var token = opentok.generateToken(sessionId);
 
     res.render('session.ejs', {
