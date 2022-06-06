@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Megna's App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <script type="text/javascript">
+        var apiKey = '<%= apiKey %>';
+        var sessionId = '<%= sessionId %>';
+        var token = '<%= token %>';
+    </script>
+    <style>
+        body { padding-top:50px; }
+    </style>
+</head>
+
+<body class="container">
+    <header>
+        <%- include('header'); %>
+    </header>
+    
+    <div id="subscriber"></div>
+    <div id="publisher"></div>
+
+    <script src="/js/stream.js"></script>
+   
+</body>
+</html>
