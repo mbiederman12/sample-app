@@ -3,6 +3,7 @@ const express = require('express');
 const res = require('express/lib/response');
 const OpenTok = require('opentok');
 const app = express();
+var invSessionId = false;
 
 // My Project API info
 const apiKey = "47512731";
@@ -36,7 +37,9 @@ app.get('/', function (req, res) {
 
   // Renders Views (Sends HTML to client) + pass in variables: apiKey, sessionId, token
   res.render('index.ejs', {
+    invSessionId: invSessionId
   });
+  invSessionId = false;
 });
 
 
@@ -45,6 +48,7 @@ app.get('/newsession', (req, res)=>{
 
   // Generate a Token from the sessionId
     var token = opentok.generateToken(sessionId);
+    invSessionId = false;
 
 
   // Renders Views (Sends HTML to client) + pass in variables: apiKey, sessionId, token
@@ -62,13 +66,23 @@ app.get('/archives', (req, res)=>{
 });
 
 app.post('/auth', function(req, res){
-    var sessionId = req.body.sessionId;
+  //get sessionID from user
+  var sessionId = req.body.sessionId;
+  //generate token, needs to throw an error 
+  
+  try{
     var token = opentok.generateToken(sessionId);
-
     res.render('session.ejs', {
-        apiKey: apiKey,
-        sessionId: sessionId,
-        token: token
-      });
+      apiKey: apiKey,
+      sessionId: sessionId,
+      token: token
+    });
+  }
+  catch{
+    res.redirect('/')
+    invSessionId = true;
+  }
+
+  
 
 })

@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <title>Megna's App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">    
+    <script type="text/javascript">
+        var invSessionId = '<%= invSessionId %>';
+    </script>
     <style>
         body { padding-top:50px; }
     </style>
@@ -13,6 +16,7 @@
     <header>
         <%- include('header'); %>
     </header>
+
     <main>
         <div class="jumbotron">
             <form action="/auth" method ="POST">
@@ -20,6 +24,9 @@
                 <input type="sessionId" name = "sessionId" placeholder="Enter Session ID Here: " id ="sessionId" required>
                 <input type="submit" value="Launch Session">
             </form>
+            <% if(invSessionId){ %>
+                <p style="color:red">ERROR: Invalid Session ID, Please try again.</p>
+             <% } %>
         </div>
       </main>
     
