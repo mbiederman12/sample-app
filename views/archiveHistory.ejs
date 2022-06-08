@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Megna's App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <style>
+        body { padding-top:50px; }
+    </style>
+</head>
+
+<body class="container">
+    <header>
+        <%- include('header'); %>
+    </header>
+    <p></p>
+    <h3>Archive List</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Time</th> 
+            <th scope="col">Status</th>
+            <th scope="col">Archive ID</th> 
+          </tr>
+        </thead>
+        <tbody>
+            
+            <% if ((archives.length) > 0) { %> 
+                <% for (var i = 0; i < archives.length; i++) { %>
+                    <tr>
+                        <td>Untitled</a></td>
+                        <td><%=archives[i].duration%> seconds</td>
+                        <td><%=archives[i].status%></td>
+                        <td><%=archives[i].id%></td>
+                      </tr>
+                <% } %>
+            <% } else { %>
+                <p> No Recordings Yet. </p>
+            <% } %>
+        </tbody>
+      </table>
+    
+    
+        
+    </div>
+    <div class="jumbotron">
+        <form action="/getarchive" method ="POST">
+            <h5>Get Archive:  </h5>
+            <input type="archiveId" name = "archiveId" placeholder="Enter Archive ID: " id ="archiveId" required>
+            <input type="submit" value="Find Archive">
+        </form>
+        <p></p>
+        <form action="/deletearchive" method="POST">
+            <h5>Delete Archive:  </h5>
+            <input type="deleteArchive" name = "deleteArchive" placeholder="Enter Archive ID: " id ="deleteArchive" required>
+            <input type="submit" value="Delete Archive">
+        </form>
+    </div>
+</body>
+   
